@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Flutter Web",
+        "type": "dart",
+        "request": "launch",
+        "program": "lib/main.dart", // Ensure this points to your main file
+        "args": [
+          "--web-port=8080" // Optional: Specify a port if needed
+        ]
+      }
+    ]
+  }
+  
