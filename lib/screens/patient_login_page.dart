@@ -18,7 +18,8 @@ class _PatientLoginPageState extends State<PatientLoginPage> {
 
   // Function to send login data to the backend
   Future<void> _loginPatient() async {
-    final String apiUrl = 'http://localhost:3000/patient/login'; // API endpoint for login
+    final String apiUrl =
+        'http://172.19.132.216:3000/patient/login'; // API endpoint for login
 
     try {
       final response = await http.post(
@@ -97,7 +98,9 @@ class _PatientLoginPageState extends State<PatientLoginPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ForgotPasswordPage()), // Navigate to forgot password page
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ForgotPasswordPage()), // Navigate to forgot password page
                   );
                 },
                 child: const Text('Forgotten Password?'),

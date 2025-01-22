@@ -18,7 +18,8 @@ class _OrganizationLoginPageState extends State<OrganizationLoginPage> {
 
   // Function to send login data to the backend
   Future<void> _loginOrganization() async {
-    final String apiUrl = 'http://localhost:3000/ngo/login'; // API endpoint for login
+    final String apiUrl =
+        'http://172.19.132.216:3000/ngo/login'; // API endpoint for login
 
     try {
       final response = await http.post(
@@ -105,14 +106,17 @@ class _OrganizationLoginPageState extends State<OrganizationLoginPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => OrganizationSignupPage()), // Navigate to signup page
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            OrganizationSignupPage()), // Navigate to signup page
                   );
                 },
                 child: const Text('Don\'t have an account? Sign Up'),
               ),
               const SizedBox(height: 16),
               TextButton(
-                onPressed: _navigateToForgotPassword, // Navigate to forgot password page
+                onPressed:
+                    _navigateToForgotPassword, // Navigate to forgot password page
                 child: const Text('Forgot Password?'),
               ),
               const SizedBox(height: 16),
@@ -145,7 +149,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   // Function to handle forgot password request
   Future<void> _resetPassword() async {
-    final String apiUrl = 'http://localhost:3000/ngo/forgot-password'; // API endpoint for forgot password
+    final String apiUrl =
+        'http://localhost:3000/ngo/forgot-password'; // API endpoint for forgot password
 
     try {
       final response = await http.post(
