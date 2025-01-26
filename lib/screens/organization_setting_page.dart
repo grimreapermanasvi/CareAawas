@@ -8,6 +8,8 @@ import 'role_selection_page.dart';
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -16,82 +18,163 @@ class SettingsPage extends StatelessWidget {
             fontFamily: 'Roboto',
             fontWeight: FontWeight.bold,
             fontSize: 24.0,
+            color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.teal.shade800,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16.0,
-          mainAxisSpacing: 16.0,
+      body: Container(
+        height: screenHeight,
+        decoration: BoxDecoration(
+          color: Colors.teal.shade800,
+        ),
+        child: Stack(
           children: [
-            _buildSettingsButton(
-              context,
-              icon: Icons.notifications,
-              label: 'Notification Settings',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NotificationSettingsPage(),
+            Positioned(
+              top: -50,
+              right: -50,
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [Colors.teal.shade600, Colors.transparent],
                   ),
-                );
-              },
+                ),
+              ),
             ),
-            _buildSettingsButton(
-              context,
-              icon: Icons.privacy_tip,
-              label: 'Privacy Settings',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PrivacySettingsPage(),
+            Positioned(
+              bottom: -100,
+              left: -100,
+              child: Container(
+                width: 300,
+                height: 300,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [Colors.teal.shade600, Colors.transparent],
                   ),
-                );
-              },
+                ),
+              ),
             ),
-            _buildSettingsButton(
-              context,
-              icon: Icons.language,
-              label: 'Language',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LanguageSettingsPage(),
+            CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(left: 8.0, bottom: 20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Customize your experience',
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Settings',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 28.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        GridView.count(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16.0,
+                          mainAxisSpacing: 16.0,
+                          children: [
+                            _buildSettingsButton(
+                              context,
+                              icon: Icons.notifications,
+                              label: 'Notification\nSettings',
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => NotificationSettingsPage(),
+                                  ),
+                                );
+                              },
+                            ),
+                            _buildSettingsButton(
+                              context,
+                              icon: Icons.privacy_tip,
+                              label: 'Privacy\nSettings',
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PrivacySettingsPage(),
+                                  ),
+                                );
+                              },
+                            ),
+                            _buildSettingsButton(
+                              context,
+                              icon: Icons.language,
+                              label: 'Language',
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LanguageSettingsPage(),
+                                  ),
+                                );
+                              },
+                            ),
+                            _buildSettingsButton(
+                              context,
+                              icon: Icons.info,
+                              label: 'About\nApp',
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AboutAppPage(),
+                                  ),
+                                );
+                              },
+                            ),
+                            _buildSettingsButton(
+                              context,
+                              icon: Icons.logout,
+                              label: 'Logout',
+                              onPressed: () {
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RoleSelectionPage(),
+                                  ),
+                                  (route) => false,
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                );
-              },
-            ),
-            _buildSettingsButton(
-              context,
-              icon: Icons.info,
-              label: 'About App',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AboutAppPage(),
-                  ),
-                );
-              },
-            ),
-            _buildSettingsButton(
-              context,
-              icon: Icons.logout,
-              label: 'Logout',
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RoleSelectionPage(),
-                  ),
-                  (route) => false,
-                );
-              },
+                ),
+              ],
             ),
           ],
         ),
@@ -109,33 +192,47 @@ class SettingsPage extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.teal,
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.teal.shade400,
+              Colors.teal.shade600,
+            ],
+          ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black26,
-              blurRadius: 4.0,
-              offset: Offset(2, 2),
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 8,
+              offset: Offset(0, 4),
             ),
           ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 50.0,
-              color: Colors.white,
+            Container(
+              padding: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withOpacity(0.2),
+              ),
+              child: Icon(
+                icon,
+                size: 32,
+                color: Colors.white,
+              ),
             ),
-            const SizedBox(height: 10.0),
+            SizedBox(height: 12),
             Text(
               label,
-              style: const TextStyle(
+              textAlign: TextAlign.center,
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 16.0,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
-              textAlign: TextAlign.center,
             ),
           ],
         ),
